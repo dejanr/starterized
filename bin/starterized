@@ -1,0 +1,30 @@
+#!/usr/bin/env node
+
+var pkg = require('../package.json');
+var program = require('commander');
+
+program.usage('[options] [command] [arguments]');
+
+program
+  .command('init [dir]')
+  .description('initialize new project inside [dir]. Defaults to public.')
+  .action(require('../commands/init').action);
+
+program
+  .command('layout <name>')
+  .description('generate markup layout with <name>')
+  .action(require('../commands/layout'));
+
+program
+  .command('page <name> [layout]')
+  .description('generate markup page with <name> which extends [layout]')
+  .action(require('../commands/page'));
+
+program
+  .command('partial <name>')
+  .description('generate markup partial with <name> which extends [parent]')
+  .action(require('../commands/partial'));
+
+program.option('-v, --verbose', 'show verbose messages');
+
+program.parse(process.argv);
