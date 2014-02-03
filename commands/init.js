@@ -6,12 +6,15 @@ var mkdirp = require('mkdirp');
 var async = require('async');
 var SKELETON_PATH = path.resolve(__dirname, '../skeleton');
 
+/**
+ * Initialize command used to scaffold a project
+ */
 var Init = function(dir) {
   this.dir = path.resolve(dir || './public');
 };
 
 /**
- * Create directory at [path] location
+ * Create directory and intermediate directories as required.
  *
  * @param String path
  * @param Function callback

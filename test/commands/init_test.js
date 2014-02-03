@@ -7,7 +7,7 @@ var Init = require('../../commands/init').Init;
 var mkdirp = require('mkdirp');
 var rimraf = require('rimraf');
 
-describe('Init Command', function() {
+describe('Initialize Command', function() {
   var sandbox;
 
   beforeEach(function() {
@@ -50,7 +50,8 @@ describe('Init Command', function() {
       });
     });
 
-    it('should create destination directory', function(done) {
+    it('should create directory and copy recursive', function(done) {
+
       var init = new Init('/tmp/test-project');
       var copyRecursive = sandbox.stub(init, 'copyRecursive',
         function(from, to, callback) {
