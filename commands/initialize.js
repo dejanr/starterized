@@ -185,7 +185,7 @@ module.exports.action = function(cwd, dir, options) {
   config.exists(rootPath, function(err, exists) {
     if (exists) {
       console.error('Starterized already initialized.\n');
-      console.error('Use -f flag to override eixsting project.');
+      console.error('Use -f option to override existing project.');
       return false;
     }
 
