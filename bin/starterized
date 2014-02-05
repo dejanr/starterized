@@ -19,7 +19,9 @@ program.option('-c, --cwd [cwd]', 'execute inside specified working dir');
 
 program
   .command('init [dir]')
-  .description('initialize new project inside [dir]. Defaults to public.')
+  .description('Initialize new project inside [dir]:\n' +
+               '                       - defaults to existing public or web folder\n' +
+               '                       - fallbacks to current working directory')
   .action(function(dir) {
     var cwd = program.cwd ? path.resolve(program.cwd) : undefined;
     initialize(cwd, dir, {
@@ -30,22 +32,22 @@ program
 
 program
   .command('serve')
-  .description('serve markup files and livereload assets')
+  .description('Serve markup files and livereload assets on change.')
   .action(serve);
 
 program
   .command('layout <name>')
-  .description('generate markup layout with <name>')
+  .description('Generate markup layout with <name>.')
   .action(layout);
 
 program
   .command('page <name> [layout]')
-  .description('generate markup page with <name> which extends [layout]')
+  .description('Generate markup page with <name> which extends [layout].')
   .action(page);
 
 program
   .command('partial <name>')
-  .description('generate markup partial with <name> which extends [parent]')
+  .description('Generate markup partial with <name> which extends [parent].')
   .action(partial);
 
 program.parse(process.argv);

@@ -142,12 +142,14 @@ Initialize.prototype.execute = function(callback) {
 module.exports.Initialize = Initialize;
 
 /**
- * Find prefered public path, defaults to .
+ * Find prefered public path, defaults to
+ * public or web folder, fallback to current
+ * working directory.
  *
  * @param String rootPath
  * @param Function callback
  */
-var findPublicDir = function(rootPath, callback) {
+function findPublicDir(rootPath, callback) {
   async.filter([
     'web',
     'public'
@@ -160,21 +162,21 @@ var findPublicDir = function(rootPath, callback) {
 
     callback('.');
   });
-};
+}
 
 /**
- * Helper for starting Initialize
+ * Helper for starting Initialize Command
  *
  * @param String rootPath
  * @param String publicDir
  */
-var initialize = function(rootPath, publicDir, options) {
-  var initialize = new Initialize(rootPath, publicDir, options);
+function initialize(rootPath, publicDir, options) {
+  var command = new Initialize(rootPath, publicDir, options);
 
   console.log('Initializing new Starterized project.');
 
-  initialize.execute();
-};
+  command.execute();
+}
 
 /**
  * Export action used by commander
