@@ -1,30 +1,55 @@
 #!/usr/bin/env node
 
-var pkg = require('../package.json');
+'use strict';
+
 var program = require('commander');
+var path = require('path');
+
+var initialize = require('../commands/initialize').action;
+var serve = require('../commands/serve').action;
+var layout = require('../commands/layout').action;
+var page = require('../commands/page').action;
+var partial = require('../commands/partial').action;
 
 program.usage('[options] [command] [arguments]');
+
+program.option('-v, --verbose', 'show verbose messages');
+program.option('-f, --force', 'force command execution');
+program.option('-c, --cwd [cwd]', 'execute inside specified working dir');
 
 program
   .command('init [dir]')
   .description('initialize new project inside [dir]. Defaults to public.')
-  .action(require('../commands/init').action);
+  .action(function(dir) {
+    var cwd = program.cwd ? path.resolve(program.cwd) : undefined;
+    initialize(cwd, dir, {
+      verbose: program.verbose,
+      force: program.force
+    });
+  });
+
+program
+  .command('serve')
+  .description('serve markup files and livereload assets')
+  .action(serve);
 
 program
   .command('layout <name>')
   .description('generate markup layout with <name>')
-  .action(require('../commands/layout'));
+  .action(layout);
 
 program
   .command('page <name> [layout]')
   .description('generate markup page with <name> which extends [layout]')
-  .action(require('../commands/page'));
+  .action(page);
 
 program
   .command('partial <name>')
   .description('generate markup partial with <name> which extends [parent]')
-  .action(require('../commands/partial'));
-
-program.option('-v, --verbose', 'show verbose messages');
+  .action(partial);
 
 program.parse(process.argv);
+
+if (process.argv.length === 2) {
+  program.help();
+}
