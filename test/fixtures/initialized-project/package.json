@@ -1,0 +1,14 @@
+{
+  "name": "Project with initialized starterized",
+  "version": "0.0.0",
+  "description": "",
+  "repository": "",
+  "main": "",
+  "scripts": {
+  },
+  "author": "",
+  "license": "MIT",
+  "starterized": {
+    "public_dir": "public"
+  }
+}
