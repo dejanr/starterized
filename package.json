@@ -1,12 +1,15 @@
 {
   "name": "starterized",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Starterized",
   "repository": {
     "type": "git",
     "url": "git@github.com:saturized/starterized-cli.git"
   },
   "main": "",
+  "bin": {
+    "starterized": "./bin/starterized"
+  },
   "scripts": {
     "test": "mocha -R spec --recursive -t 10000 test"
   },
