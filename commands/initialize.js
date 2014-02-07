@@ -132,24 +132,15 @@ Initialize.prototype.execute = function(callback) {
   });
 };
 
-// **************
-// Module Exports
-// **************
-
 /**
- * Export Initialize Command
- */
-module.exports.Initialize = Initialize;
-
-/**
- * Find prefered public path, defaults to
+ * Find preferred public path, defaults to
  * public or web folder, fallback to current
  * working directory.
  *
  * @param String rootPath
  * @param Function callback
  */
-function findPublicDir(rootPath, callback) {
+function findPreferredPublicDir(rootPath, callback) {
   async.filter([
     'web',
     'public'
@@ -164,24 +155,20 @@ function findPublicDir(rootPath, callback) {
   });
 }
 
+// **************
+// Module Exports
+// **************
+
 /**
- * Helper for starting Initialize Command
- *
- * @param String rootPath
- * @param String publicDir
+ * Export Initialize Command
  */
-function initialize(rootPath, publicDir, options) {
-  var command = new Initialize(rootPath, publicDir, options);
-
-  console.log('Initializing new Starterized project.');
-
-  command.execute();
-}
+module.exports.Initialize = Initialize;
 
 /**
  * Export action used by commander
  */
 module.exports.action = function(cwd, dir, options) {
+  var command;
   var rootPath = cwd || path.resolve('.');
 
   config.exists(rootPath, function(err, exists) {
@@ -191,11 +178,15 @@ module.exports.action = function(cwd, dir, options) {
       return false;
     }
 
+    console.log('Initializing new Starterized project.');
+
     if (dir) {
-      initialize(rootPath, dir, options);
+      command = new Initialize(rootPath, dir, options);
+      command.execute();
     } else {
-      findPublicDir(rootPath, function(publicDir) {
-        initialize(rootPath, publicDir, options);
+      findPreferredPublicDir(rootPath, function(publicDir) {
+        command = new Initialize(rootPath, publicDir, options);
+        command.execute();
       });
     }
   });
