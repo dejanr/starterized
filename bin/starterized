@@ -21,7 +21,8 @@ program
   .command('init [dir]')
   .description('Initialize new project inside [dir]:\n' +
                '                       - defaults to existing public or web folder\n' +
-               '                       - fallbacks to current working directory')
+               '                       - fallbacks to current working directory\n' +
+               '                       - or use optional [dir] path when specified')
   .action(function(dir) {
     var cwd = program.cwd ? path.resolve(program.cwd) : undefined;
     initialize(cwd, dir, {
