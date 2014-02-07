@@ -2,7 +2,7 @@
 
 var sinon = require('sinon');
 var expect = require('expect.js');
-var config = require('../config');
+var config = require('../../library/config');
 var path = require('path');
 
 describe('config', function() {

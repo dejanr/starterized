@@ -3,7 +3,7 @@
 var fs = require('fs');
 var path = require('path');
 
-var parseJSON = function(data) {
+exports.parseJSON = function(data) {
   try {
     return JSON.parse(data);
   } catch (e) {
@@ -28,7 +28,7 @@ exports.parse = function(rootPath, callback) {
       return callback(err);
     }
 
-    var cfg = parseJSON(data) || {};
+    var cfg = exports.parseJSON(data) || {};
 
     callback(undefined, cfg.starterized);
   });
