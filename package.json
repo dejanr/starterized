@@ -1,17 +1,18 @@
 {
-  "name": "starterized-cli",
-  "version": "0.0.0",
-  "description": "Starterized Command Line Interface",
-  "repository": "git@github.com:saturized/starterized-cli.git",
-  "main": "index.js",
+  "name": "starterized",
+  "version": "0.0.1",
+  "description": "Starterized",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:saturized/starterized-cli.git"
+  },
+  "main": "",
   "scripts": {
     "test": "mocha -R spec --recursive -t 10000 test"
   },
-  "author": "Saturized <Interactive Agency>",
+  "author": "Saturized Interactive Agency http://www.saturized.com",
   "license": "MIT",
   "dependencies": {
-    "optimist": "~0.6.0",
-    "prompt": "~0.2.12",
     "commander": "~2.1.0",
     "mkdirp": "~0.3.5",
     "async": "~0.2.10",
@@ -24,5 +25,16 @@
     "expect.js": "~0.2.0",
     "rimraf": "~2.2.6",
     "debug": "~0.7.4"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/saturized/starterized/issues"
+  },
+  "homepage": "https://github.com/saturized/starterized",
+  "directories": {
+  },
+  "keywords": [
+    "compass",
+    "modular",
+    "framework"
+  ]
 }
