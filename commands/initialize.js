@@ -4,7 +4,7 @@ var fs = require('fs');
 var path = require('path');
 var mkdirp = require('mkdirp');
 var async = require('async');
-var config = require('../config');
+var config = require('../library/config');
 var SKELETON_PATH = path.resolve(__dirname, '../skeleton');
 
 /**
@@ -17,6 +17,7 @@ var SKELETON_PATH = path.resolve(__dirname, '../skeleton');
 var Initialize = function(rootPath, publicDir, options) {
   this.rootPath = rootPath ? rootPath : path.resolve('.');
   this.publicPath = path.resolve(this.rootPath, publicDir);
+  this.publicDir = publicDir;
   this.options = options;
 };
 
@@ -97,6 +98,22 @@ Initialize.prototype.copyRecursive = function(dir, dest, callback) {
   });
 };
 
+Initialize.prototype.writeConfig = function(cfg, callback) {
+  var packagePath = path.resolve(this.rootPath, 'package.json');
+
+  fs.readFile(packagePath, function(err, data) {
+    var pkg = config.parseJSON(data);
+
+    if (pkg) {
+      pkg.starterized = cfg;
+
+      fs.writeFile(packagePath, JSON.stringify(pkg, null, 2), callback);
+    } else {
+      callback(new Error('Error parsing package.json.'));
+    }
+  });
+};
+
 /**
  * Execute Initialize Command
  *
@@ -120,6 +137,10 @@ Initialize.prototype.execute = function(callback) {
       }
     }, function copySkeletonRecursive(callback) {
       that.copyRecursive(SKELETON_PATH, that.publicPath, callback);
+    }, function writeConfig(callback) {
+      that.writeConfig({
+        publicDir: that.publicDir || '.'
+      }, callback);
     }
   ], function(err) {
     if (err && callback) {
@@ -127,7 +148,7 @@ Initialize.prototype.execute = function(callback) {
     }
 
     if (callback) {
-      callback(null, '=> Starterized has been initialized');
+      callback();
     }
   });
 };
@@ -169,10 +190,9 @@ module.exports.Initialize = Initialize;
  */
 module.exports.action = function(cwd, dir, options) {
   var command;
-  var rootPath = cwd || path.resolve('.');
 
-  config.exists(rootPath, function(err, exists) {
-    if (exists) {
+  config.exists(cwd, function(err, exists) {
+    if (exists && !options.force) {
       console.error('Starterized already initialized.\n');
       console.error('Use -f option to override existing project.');
       return false;
@@ -181,11 +201,11 @@ module.exports.action = function(cwd, dir, options) {
     console.log('Initializing new Starterized project.');
 
     if (dir) {
-      command = new Initialize(rootPath, dir, options);
+      command = new Initialize(cwd, dir, options);
       command.execute();
     } else {
-      findPreferredPublicDir(rootPath, function(publicDir) {
-        command = new Initialize(rootPath, publicDir, options);
+      findPreferredPublicDir(cwd, function(publicDir) {
+        command = new Initialize(cwd, publicDir, options);
         command.execute();
       });
     }
