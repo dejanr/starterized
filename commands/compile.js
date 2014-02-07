@@ -1,5 +1,7 @@
 'use strict';
 
+var fs = require('fs');
+var path = require('path');
 var spawn = require('child_process').spawn;
 var which = require('which');
 var config = require('../library/config');
@@ -14,22 +16,57 @@ function Compile(cwd, options) {
   this.options = options;
 }
 
+/**
+ * Read config from package.json
+ *
+ * @param Function callback
+ */
+Compile.prototype.readConfig = function(callback) {
+  var packagePath = path.resolve(this.cwd, 'package.json');
+
+  fs.readFile(packagePath, function(err, data) {
+    var cfg = config.parseJSON(data);
+
+    if (cfg) {
+      callback(null, cfg.starterized);
+    } else {
+      callback(new Error('Error reading package.json config.'));
+    }
+  });
+};
+
 Compile.prototype.execute = function() {
   var options = [];
   var process;
+  var cwd = this.cwd;
 
-  options.push('compile');
-  options.push('web');
+  this.readConfig(function(err, cfg) {
+    if (err) {
+      console.log(err);
+      return false;
+    }
 
-  process = spawn('compass', options);
+    var publicPath = path.resolve(cwd, cfg.publicDir);
 
-  process.stdout.setEncoding('utf8');
-  process.stdout.on('data', function(data) {
-    console.log(data);
-  });
-  process.stderr.setEncoding('utf8');
-  process.stderr.on('data', function(data) {
-    console.log(data);
+    fs.exists(publicPath, function(exists) {
+      if (!exists) {
+        console.error('Starterized publicDir folder doesnt exists.');
+        return false;
+      }
+
+      options.push('compile');
+      options.push(publicPath);
+
+      process = spawn('compass', options);
+      process.stdout.setEncoding('utf8');
+      process.stdout.on('data', function(data) {
+        console.log(data);
+      });
+      process.stderr.setEncoding('utf8');
+      process.stderr.on('data', function(data) {
+        console.log(data);
+      });
+    });
   });
 };
 
