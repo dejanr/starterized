@@ -32,6 +32,11 @@ program
   });
 
 program
+  .command('compile')
+  .description('Compile compass.')
+  .action(serve);
+
+program
   .command('serve')
   .description('Serve markup files and livereload assets on change.')
   .action(serve);
