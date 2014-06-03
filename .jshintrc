@@ -64,8 +64,13 @@
 
     "predef"        : [
       "describe",
+      "xdescribe",
       "it",
+      "xit",
       "beforeEach",
-      "afterEach"
+      "afterEach",
+      "spyOn",
+      "createSpy",
+      "expect"
     ]
 }

@@ -1,0 +1,14 @@
+Usage: starterized [options] [command]
+
+Description:
+
+  Starterized Command Line Tools.
+
+Commands:
+
+  init <path>       initialize a project
+  help <command>    show usage help
+
+Options:
+
+  -v, --version     ouput version number

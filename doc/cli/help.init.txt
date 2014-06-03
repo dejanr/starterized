@@ -1,0 +1,16 @@
+Usage: starterized [options] init <path>
+
+Description:
+
+  Initialize a project.
+
+  When <path> is specified initize within <path> inside current working directory,
+  otherwise initialize in current working directory.
+
+  Project path is resolved from current working directory and <path>.
+
+Options:
+
+  --cwd [dir]       change current working directory
+  -v, --verbose     show verbose informations
+  -q, --quiet       quiet all output informations
