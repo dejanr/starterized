@@ -1,13 +1,14 @@
-Usage: starterized [options] init <path>
+Usage: starterized [options] init <publicDir>
 
 Description:
 
-  Initialize a project.
+  Initialize a project skeleton.
 
-  When <path> is specified initize within <path> inside current working directory,
-  otherwise initialize in current working directory.
+  When <publicDir> is specified initize skeleton within <publicDir>
+  Otherwise initialize skeleton in current working directory.
 
-  Project path is resolved from current working directory and <path>.
+  When <publicDir> is omitted, we would look for common public paths
+  like public and web, and if found we would use it.
 
 Options:
 
