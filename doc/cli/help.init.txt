@@ -13,5 +13,6 @@ Description:
 Options:
 
   --cwd [dir]       change current working directory
+  -f, --force       execute command by force, overriding existing files
   -v, --verbose     show verbose informations
-  -q, --quiet       quiet all output informations
+  -s, --silent      quiet all output informations
