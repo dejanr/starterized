@@ -9,6 +9,10 @@ describe('starterized init', function() {
   it('should exit with error when project already exists', function() {
     var errorSpy = createSpy('errorSpy');
 
+    init.__set__('async', {
+      series: createSpy()
+    });
+
     init.__set__('config', {
       exists: spyOn(config, 'exists').and.callFake(function(rootPath, callback) {
         callback(undefined, true);
@@ -38,6 +42,6 @@ describe('starterized init', function() {
     init('cwd', '', false);
 
     expect(errorSpy.calls.count()).toEqual(0);
-
   });
+
 });
