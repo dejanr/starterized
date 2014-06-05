@@ -1,0 +1,18 @@
+Usage: starterized [options] init <publicDir>
+
+Description:
+
+  Initialize a project skeleton.
+
+  When <publicDir> is specified initize skeleton within <publicDir>
+  Otherwise initialize skeleton in current working directory.
+
+  When <publicDir> is omitted, we would look for common public paths
+  like public and web, and if found we would use it.
+
+Options:
+
+  --cwd [dir]       change current working directory
+  -f, --force       execute command by force, overriding existing files
+  -v, --verbose     show verbose informations
+  -s, --silent      quiet all output informations
