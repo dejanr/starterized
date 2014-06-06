@@ -4,7 +4,6 @@ var rewire = require('rewire');
 var config = require('../../lib/starterized/config');
 var compass = require('../../lib/starterized/util/compass');
 var eventBus = require('../../lib/starterized/util/event_bus');
-var path = require('path');
 
 describe('starterized compile', function() {
   var compile;
