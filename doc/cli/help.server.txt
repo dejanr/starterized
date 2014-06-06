@@ -1,0 +1,11 @@
+Usage: starterized [options] server
+
+Description:
+
+  Start server, for serving markup files.
+
+Options:
+
+  --cwd [dir]       change current working directory
+  -v, --verbose     show verbose informations
+  -s, --silent      quiet all output informations
