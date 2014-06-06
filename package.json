@@ -43,8 +43,5 @@
     "modular",
     "atomic",
     "framework"
-  ],
-  "starterized": {
-    "publicDir": "/tmp/test"
-  }
+  ]
 }
