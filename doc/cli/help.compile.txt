@@ -1,0 +1,11 @@
+Usage: starterized [options] compile
+
+Description:
+
+  Compile project assets.
+
+Options:
+
+  --cwd [dir]       change current working directory
+  -v, --verbose     show verbose informations
+  -s, --silent      quiet all output informations
