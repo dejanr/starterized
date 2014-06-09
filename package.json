@@ -1,10 +1,10 @@
 {
   "name": "starterized",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Starterized",
   "repository": {
     "type": "git",
-    "url": "git@github.com:saturized/starterized-cli.git"
+    "url": "https://github.com/saturized/starterized.git"
   },
   "main": "",
   "bin": {
