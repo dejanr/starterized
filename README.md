@@ -12,7 +12,7 @@ Required software
 Installation
 ------------
 
-    $ npm install -g starterized-cli
+    $ npm install -g starterized
 
 Usage
 -----
