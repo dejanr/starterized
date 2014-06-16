@@ -1,6 +1,6 @@
 'use strict';
 
-var cli = require('../../lib/cli');
+var compile = require('../../lib/cli/compile');
 var starterized = require('../../lib/starterized');
 
 describe('$ starterized init <path>', function() {
@@ -10,12 +10,12 @@ describe('$ starterized init <path>', function() {
   });
 
   it('should compile a project in cwd', function() {
-    cli.argv(['node', '/usr/local/bin/starterized', 'compile']);
+    compile(['node', '/usr/local/bin/starterized', 'compile']);
     expect(starterized.compile).toHaveBeenCalledWith(process.cwd());
   });
 
   it('should compile a project in other directory specified but --cwd', function() {
-    cli.argv(['node', '/usr/local/bin/starterized', 'compile', '--cwd', '~/Projects/demo']);
+    compile(['node', '/usr/local/bin/starterized', 'compile', '--cwd', '~/Projects/demo']);
     expect(starterized.compile).toHaveBeenCalledWith('~/Projects/demo');
   });
 });
