@@ -1,7 +1,7 @@
 'use strict';
 
-var cli = require('../../lib/cli');
 var starterized = require('../../lib/starterized');
+var server = require('../../lib/cli/server');
 
 describe('$ starterized server', function() {
 
@@ -10,13 +10,13 @@ describe('$ starterized server', function() {
   });
 
   it('should start server for a project in cwd', function() {
-    cli.argv(['node', '/usr/local/bin/starterized', 'server']);
-    expect(starterized.server).toHaveBeenCalledWith(process.cwd());
+    server(['node', '/usr/local/bin/starterized', 'server']);
+    expect(starterized.server).toHaveBeenCalledWith(process.cwd(), 9000);
   });
 
   it('should start server for a project in specified cwd', function() {
-    cli.argv(['node', '/usr/local/bin/starterized', 'server', '--cwd', '~/Projects']);
-    expect(starterized.server).toHaveBeenCalledWith('~/Projects');
+    server(['node', '/usr/local/bin/starterized', 'server', '--cwd', '~/Projects']);
+    expect(starterized.server).toHaveBeenCalledWith('~/Projects', 9000);
   });
 
 });

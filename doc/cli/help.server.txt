@@ -7,5 +7,6 @@ Description:
 Options:
 
   --cwd [dir]       change current working directory
+  -p, --port [port] change server port
   -v, --verbose     show verbose informations
   -s, --silent      quiet all output informations
