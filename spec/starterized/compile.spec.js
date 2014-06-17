@@ -1,7 +1,6 @@
 'use strict';
 
 var rewire = require('rewire');
-var config = require('../../lib/starterized/config');
 var compass = require('../../lib/starterized/util/compass');
 var eventBus = require('../../lib/starterized/util/event_bus');
 
@@ -15,11 +14,12 @@ describe('starterized compile', function() {
   it('should exit with error when project doesn\'t exists', function() {
     var errorSpy = createSpy('errorSpy');
 
-    compile.__set__('config', {
-      exists: spyOn(config, 'exists').and.callFake(function(rootPath, callback) {
-        callback(undefined, false);
+    compile.__set__('parseConfig', createSpy().and.callFake(function() {
+        return function(callback) {
+          callback(new Error('Starterized project not found.'));
+        };
       })
-    });
+    );
 
     eventBus.removeAllListeners('error');
     eventBus.on('error', errorSpy);

@@ -18,7 +18,8 @@ describe('compass', function() {
       stderr: {
         setEncoding: createSpy(),
         on: createSpy()
-      }
+      },
+      on: createSpy()
     });
 
     compass.__set__('spawn', spawnSpy);
