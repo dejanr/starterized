@@ -13,4 +13,4 @@ Commands:
 
 Options:
 
-  --version         ouput version number
+  --version         output version number
