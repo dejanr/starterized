@@ -6,9 +6,11 @@ Description:
 
 Commands:
 
-  init <path>       initialize a project
-  help <command>    show usage help
+  init <path>       initialize a project with public at <path>
+  compile           compile project assets
+  server            start markup server
+  help <command>    show usage help for <command>
 
 Options:
 
-  -v, --version     ouput version number
+  --version         ouput version number
